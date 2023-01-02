@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     public float jumpForce;
     public float gravityModifier;
     public bool isOnGround = true;
+    public bool secondJump;
     public bool gameOver = false;
 
     
@@ -32,15 +33,31 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && isOnGround)
+        if (Input.GetKeyDown(KeyCode.Space) && !gameOver)
         {
+            if (isOnGround)
+            {
+                playerRb.velocity = Vector3.up * jumpForce;
+                isOnGround = false;
+                secondJump = true;
+                playerAnim.SetTrigger("Jump_trig");
+                playerAudio.PlayOneShot(jumpSound, 1f);
+                playerAnim.SetBool("Grounded", false);
 
-            playerRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-            isOnGround = false;
-            playerAnim.SetTrigger("Jump_trig");
-            playerAudio.PlayOneShot(jumpSound, 1f);
+            }
 
+
+            else if (secondJump)
+            {
+                playerRb.velocity = Vector3.up * jumpForce;
+                playerAnim.SetTrigger("Jump_trig");
+                playerAudio.PlayOneShot(jumpSound, 2f);
+                secondJump = false;
+                playerAnim.SetBool("bb", true);
+
+            }
         }
+
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -48,7 +65,10 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Ground") && !gameOver)
         {
             isOnGround = true;
+            secondJump = false;
             dirtParticle.Play();
+            playerAnim.SetBool("Grounded", true);
+            playerAnim.SetBool("bb", false);
         }
         else if (collision.gameObject.CompareTag("Obstacle"))
         {

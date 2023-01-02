@@ -882,9 +882,10 @@ MonoBehaviour:
   crashSound: {fileID: 8300000, guid: 913d6445ee8cc4152a9c18da590ee203, type: 3}
   dirtParticle: {fileID: 1580478723}
   explosionParticle: {fileID: 1206347482}
-  jumpForce: 750
+  jumpForce: 10
   gravityModifier: 2
   isOnGround: 1
+  secondJump: 0
   gameOver: 0
 --- !u!82 &1457447361
 AudioSource:
