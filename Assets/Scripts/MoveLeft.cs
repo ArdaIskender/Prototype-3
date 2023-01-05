@@ -5,13 +5,13 @@ using UnityEngine;
 
 public class MoveLeft : MonoBehaviour
 {
-    private float speed = 15f;
+    public float speed = 15f;
     private float leftBound = -10f;
     private float scoreBound = -2f;
     private bool isScoreAdded = false;
     private PlayerController playerControllerScript;
     private ScoreManager scoreManagerScript;
-    
+    public GameObject FloatingTextPrefab;
 
     void Start()
     {
@@ -29,7 +29,9 @@ public class MoveLeft : MonoBehaviour
         }
         if (transform.position.x < scoreBound && gameObject.CompareTag("Obstacle") && !isScoreAdded)
         {
-            
+            // trigger floating text
+            ShowFloatingText();
+            // add score
             scoreManagerScript.score += 5;
             isScoreAdded = true;
             
@@ -39,7 +41,20 @@ public class MoveLeft : MonoBehaviour
             isScoreAdded = false;
             Destroy(gameObject);
         }
+        if (Input.GetKey(KeyCode.V))
+        {
+            speed = 30f;
+            scoreManagerScript.score += Time.deltaTime;
 
+        }
+        else if (Input.GetKeyUp(KeyCode.V))
+        {
+            speed = 15f;
+        }
+    }
 
+    void ShowFloatingText()
+    {
+        Instantiate(FloatingTextPrefab, transform.position, Quaternion.identity, transform);
     }
 }
