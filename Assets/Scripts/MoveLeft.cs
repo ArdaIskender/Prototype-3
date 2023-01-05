@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class MoveLeft : MonoBehaviour
 {
@@ -17,7 +18,7 @@ public class MoveLeft : MonoBehaviour
     {
         playerControllerScript = GameObject.Find("Player").GetComponent<PlayerController>();
         scoreManagerScript = GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
-        
+
     }
 
     // Update is called once per frame
@@ -41,11 +42,11 @@ public class MoveLeft : MonoBehaviour
             isScoreAdded = false;
             Destroy(gameObject);
         }
+        
         if (Input.GetKey(KeyCode.V))
         {
             speed = 30f;
-            scoreManagerScript.score += Time.deltaTime;
-
+            scoreManagerScript.score += (Time.deltaTime*25);
         }
         else if (Input.GetKeyUp(KeyCode.V))
         {

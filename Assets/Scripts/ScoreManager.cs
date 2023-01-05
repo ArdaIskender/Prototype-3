@@ -26,7 +26,14 @@ public class ScoreManager : MonoBehaviour
         { 
         // score increases every second by 1
         score += Time.deltaTime;
-        scoreText.text = $"Score: {(int)score}";
+            if (Input.GetKey(KeyCode.V))
+            {
+                scoreText.text = $"Score: {(int)score} boost mode!";
+            }
+            else if (!Input.GetKey(KeyCode.V))
+            {
+                scoreText.text = $"Score: {(int)score}";
+            }
         }
     }
 }

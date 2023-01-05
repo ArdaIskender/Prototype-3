@@ -7,7 +7,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody playerRb;
-    private Animator playerAnim;
+    public Animator playerAnim;
     private AudioSource playerAudio;
     public AudioClip jumpSound;
     public AudioClip crashSound;
@@ -59,6 +59,15 @@ public class PlayerController : MonoBehaviour
                 playerAnim.SetBool("bb", true);
 
             }
+        }
+
+        if (Input.GetKey(KeyCode.V))
+        {
+            playerAnim.speed = 2;
+        }
+        else if (Input.GetKeyUp(KeyCode.V))
+        {
+            playerAnim.speed = 1;
         }
 
     }
