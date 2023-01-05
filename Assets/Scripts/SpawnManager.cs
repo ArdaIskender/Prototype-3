@@ -4,6 +4,7 @@ public class SpawnManager : MonoBehaviour
 {
     public GameObject[] obstaclePrefab;
     private PlayerController playerControllerScript;
+    // private ScoreManager scoreManagerScript;
 
     private Vector3 spawnPos = new Vector3(25, 0, 0);
 
@@ -13,6 +14,7 @@ public class SpawnManager : MonoBehaviour
     void Start()
     {
         playerControllerScript = GameObject.Find("Player").GetComponent<PlayerController>();
+     //   scoreManagerScript = GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
         InvokeRepeating("SpawnObstacle", startDelay, repeatRate);
     }
 
@@ -25,8 +27,9 @@ public class SpawnManager : MonoBehaviour
     {
         if (playerControllerScript.gameOver == false)
         {
-            //int prefab = Random.Range(0, obstaclePrefab.Length);
-            int prefab = 1;
+            int prefab = Random.Range(0, obstaclePrefab.Length);
+
+            // If obstacle gonna be a box, there is chance to spawn two boxes together
             if (prefab == 1)
             {
                 int howManyBox = Random.Range(1, 3);
@@ -48,6 +51,8 @@ public class SpawnManager : MonoBehaviour
                     Instantiate(obstaclePrefab[prefab], spawnPos, obstaclePrefab[prefab].transform.rotation);
                     Instantiate(obstaclePrefab[prefab], spawnPos2, obstaclePrefab[prefab].transform.rotation);
                 }
+            
+
             }
             else
             {
