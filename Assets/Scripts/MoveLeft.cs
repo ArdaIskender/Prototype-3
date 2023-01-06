@@ -6,7 +6,7 @@ using UnityEngine.SocialPlatforms.Impl;
 
 public class MoveLeft : MonoBehaviour
 {
-    public float speed = 15f;
+    public float speed = 10f;
     private float leftBound = -10f;
     private float scoreBound = -2f;
     private bool isScoreAdded = false;

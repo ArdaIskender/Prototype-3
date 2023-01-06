@@ -42,7 +42,7 @@ public class PlayerController : MonoBehaviour
                 playerAnim.SetTrigger("Jump_trig");
                 playerAudio.PlayOneShot(jumpSound, 1f);
                 playerAnim.SetBool("Grounded", false);
-
+                dirtParticle.Stop();
             }
 
 
